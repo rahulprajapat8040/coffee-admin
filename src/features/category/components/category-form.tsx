@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/text-area";
 import { Button } from "@/components/ui/button";
 import { UploadImage } from "@/features/files/components/upload-image";
-import type { ICategoryForm } from "../interfaces/category-form";
+import type { ICategoryForm } from "../interfaces/category-form.interface";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 import { categoryApi } from "../api/category.api";
 import { toast } from "sonner";

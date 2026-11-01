@@ -51,6 +51,7 @@ export const CoffeeVariant = ({
               <React.Fragment key={field.id}>
                 <div>
                   <Input
+                    placeholder="e.g. S"
                     className="bg-white rounded-md"
                     {...register(`variants.${index}.size`)}
                   />

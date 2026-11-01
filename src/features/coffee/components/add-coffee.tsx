@@ -9,7 +9,7 @@ const defaultValues: ICoffeeForm = {
   description: "",
   categoryId: "",
   image: "",
-  variants: [],
+  variants: [{ size: "", price: "" }],
 };
 
 export const AddCoffee = () => {

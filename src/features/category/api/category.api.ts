@@ -1,5 +1,5 @@
 import { request } from "@/api/axios/request";
-import type { ICategoryForm } from "../interfaces/category-form";
+import type { ICategoryForm } from "../interfaces/category-form.interface";
 import { API_ENDPOINTS } from "@/lib/utils/constant/route-constant";
 import type { ISearchParam } from "@/lib/interface/query.interface";
 import { GetFilterUrl } from "@/lib/utils/helper/function.helper";

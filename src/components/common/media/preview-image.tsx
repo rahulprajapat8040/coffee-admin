@@ -43,9 +43,7 @@ const PreviewImage: React.FC<PreviewImageProp> = ({
         onError={() => setHasError(true)}
       />
 
-      {text && (
-        <span className="font-medium text-sm truncate max-w-12.5">{text}</span>
-      )}
+      {text && <span className="font-medium text-sm truncate">{text}</span>}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import type { ICategoryForm } from "../interfaces/category-form"
+import type { ICategoryForm } from "../interfaces/category-form.interface"
 import type { ICategory } from "../interfaces/category-res.interface"
 import { Pencil } from "lucide-react";
 import { useState } from "react";

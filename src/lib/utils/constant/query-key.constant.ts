@@ -4,4 +4,5 @@ export const QUERY_KEY = {
   LIST: "list",
   DETAIL: "detail",
   COFFEE: "coffee",
+  SELECT: "select",
 };

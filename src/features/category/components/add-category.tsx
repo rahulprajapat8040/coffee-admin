@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { CategoryForm } from "./category-form";
 import { useState } from "react";
-import type { ICategoryForm } from "../interfaces/category-form";
+import type { ICategoryForm } from "../interfaces/category-form.interface";
 
 const defaultValues: ICategoryForm = {
   name: "",

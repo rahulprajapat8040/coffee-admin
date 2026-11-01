@@ -1,6 +1,8 @@
 import { PageHeader } from "@/components/common/page/page-header"
 import { AddCoffee } from "../components/add-coffee";
 import { CategoryFilter } from "../components/category-filter";
+import { Suspense } from "react";
+import { CoffeeTable } from "../components/coffee-table";
 
 export const Coffees = ()=> {
     return (
@@ -10,6 +12,9 @@ export const Coffees = ()=> {
           <AddCoffee />
         </div>
         <CategoryFilter />
+        <Suspense>
+          <CoffeeTable />
+        </Suspense>
       </div>
     );
 }

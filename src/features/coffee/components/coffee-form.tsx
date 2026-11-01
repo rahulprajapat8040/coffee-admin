@@ -9,8 +9,15 @@ import { UploadImage } from "@/features/files/components/upload-image";
 import { Validation } from "@/lib/utils/helper/validation.helper";
 import { ErrorMessage } from "@/components/ui/error-message";
 import { CoffeeVariant } from "./coffee-variants";
+import { Button } from "@/components/ui/button";
+import { useApiMutation } from "@/hooks/use-api-mutation";
+import { coffeeApi } from "../api/coffee.api";
+import { toast } from "sonner";
+import { CategorySelect } from "@/features/category/components/category-select";
+import { useEffect } from "react";
 
 interface Props {
+  id?: string;
   title: string;
   open: boolean;
   onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,6 +25,7 @@ interface Props {
 }
 
 export const CoffeeForm = ({
+  id,
   title,
   open,
   onOpenChange,
@@ -27,12 +35,41 @@ export const CoffeeForm = ({
   const {
     register,
     handleSubmit,
+    reset,
     control,
     formState: { errors },
   } = form;
 
+  useEffect(() => {
+    if (open) {
+      reset({
+        name: defaultValues.name ?? "",
+        description: defaultValues.description ?? "",
+        image: defaultValues.image ?? "",
+        categoryId: defaultValues.categoryId,
+        variants: defaultValues.variants ?? [],
+      });
+    }
+  }, [open, defaultValues, reset]);
+
+  const { mutate: addMutate, isPending: addPending } = useApiMutation(
+    coffeeApi.createCoffee,
+    {
+      onSuccess() {
+        toast.success("Coffee added successfully");
+        onOpenChange(false);
+      },
+      onError(err) {
+        toast.error(err.message || "Error in adding coffee. Try again!");
+      },
+    },
+  );
+
   const onSubmit = (data: ICoffeeForm) => {
-    console.log("dataa", data);
+    if (id) {
+    } else {
+      addMutate(data);
+    }
   };
 
   return (
@@ -74,7 +111,22 @@ export const CoffeeForm = ({
               )}
             />
           </div>
+          <Controller
+            name="categoryId"
+            control={control}
+            render={({ field }) => {
+              return (
+                <CategorySelect value={field.value} onChange={field.onChange} />
+              );
+            }}
+          />
           <CoffeeVariant form={form} />
+          <div className="flex items-center justify-end gap-5">
+            <Button disabled={addPending} type="reset" variant={"secondary"}>
+              Cancel
+            </Button>
+            <Button disabled={addPending}>Save</Button>
+          </div>
         </form>
       </DialogContent>
     </Dialog>
