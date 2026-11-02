@@ -3,11 +3,12 @@ import { coffeeApi } from "../api/coffee.api";
 import { QUERY_KEY } from "@/lib/utils/constant/query-key.constant";
 import { useQueryParams } from "@/hooks/use-query-param";
 import type { ISearchParam } from "@/lib/interface/query.interface";
-import { Table, type Column } from "@/components/ui/table";
+import { Table, type Column } from "@/components/common/table/table";
 import type { ICoffee } from "../interface/coffee-res.interface";
 import PreviewImage from "@/components/common/media/preview-image";
 import { CoffeeVairantList } from "./coffee-variant-list";
 import { CoffeeStatusToggle } from "./coffee-status-toggle";
+import { Pagination } from "@/components/common/table/pagination";
 
 export const CoffeeTable = () => {
   const { params } = useQueryParams<ISearchParam>();
@@ -49,11 +50,14 @@ export const CoffeeTable = () => {
   ];
 
   return (
-    <Table
-      data={data}
-      columns={columns}
-      getRowId={(coffee) => coffee.id}
-      emptyMessage="No coffees found."
-    />
+    <div>
+      <Table
+        data={data}
+        columns={columns}
+        getRowId={(coffee) => coffee.id}
+        emptyMessage="No coffees found."
+      />
+      <Pagination paginationData={pageInfo} />
+    </div>
   );
 };

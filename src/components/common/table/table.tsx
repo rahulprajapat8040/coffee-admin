@@ -27,7 +27,7 @@ export function Table<T>({
   onRowClick,
 }: DataTableProps<T>) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-card">
+    <div className="overflow-x-hidden overflow-y-scroll rounded-2xl border border-border bg-card h-100">
       <div className="w-full overflow-x-auto">
         <table className="w-full text-sm">
           {/* Table Header */}
@@ -45,7 +45,7 @@ export function Table<T>({
           </thead>
 
           {/* Table Body */}
-          <tbody>
+          <tbody >
             {loading ? (
               <tr>
                 <td
