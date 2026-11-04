@@ -2,7 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { coffeeApi } from "../api/coffee.api";
 import { QUERY_KEY } from "@/lib/utils/constant/query-key.constant";
 import { useQueryParams } from "@/hooks/use-query-param";
-import type { ISearchParam } from "@/lib/interface/query.interface";
+import type { ICoffeeQuery } from "@/lib/interface/query.interface";
 import { Table, type Column } from "@/components/common/table/table";
 import type { ICoffee } from "../interface/coffee-res.interface";
 import PreviewImage from "@/components/common/media/preview-image";
@@ -11,15 +11,15 @@ import { CoffeeStatusToggle } from "./coffee-status-toggle";
 import { Pagination } from "@/components/common/table/pagination";
 
 export const CoffeeTable = () => {
-  const { params } = useQueryParams<ISearchParam>();
-  const { page = 1, limit = 10 } = params;
+  const { params } = useQueryParams<ICoffeeQuery>();
+  const { page = 1, limit = 10, categoryId } = params;
   const {
     data: {
       data: { data, pageInfo },
     },
   } = useSuspenseQuery({
-    queryFn: () => coffeeApi.getCoffees({ page, limit }),
-    queryKey: [QUERY_KEY.COFFEE, QUERY_KEY.LIST, page, limit],
+    queryFn: () => coffeeApi.getCoffees({ page, limit, categoryId }),
+    queryKey: [QUERY_KEY.COFFEE, QUERY_KEY.LIST, page, limit, categoryId],
   });
 
   const columns: Column<ICoffee>[] = [

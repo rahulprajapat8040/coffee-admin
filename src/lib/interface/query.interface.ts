@@ -4,3 +4,7 @@ export interface ISearchParam {
     limit: number
     search?: string
 }
+
+export interface ICoffeeQuery extends ISearchParam {
+  categoryId?: string;
+}

@@ -7,7 +7,7 @@ import { useQueryParams } from "@/hooks/use-query-param";
 
 export const Coffees = ()=> {
 
-  const {params, setSearchParams} = useQueryParams<{ category: string | null }>();
+  const {params, setSearchParams} = useQueryParams<{ categoryId: string | null }>();
   
     return (
       <div className="space-y-5">
@@ -16,8 +16,8 @@ export const Coffees = ()=> {
           <AddCoffee />
         </div>
         <CategoryFilter
-          value={params.category}
-          onChange={(c) => setSearchParams(c ? { category: c.id } : {})}
+          value={params.categoryId}
+          onChange={(c) => setSearchParams(c ? { categoryId: c.id } : {})}
         />
         <Suspense>
           <CoffeeTable />
