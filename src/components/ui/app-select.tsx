@@ -26,6 +26,8 @@ interface AppSelectProps {
   disabled?: boolean;
 
   className?: string;
+
+  ariaLabel?: string;
 }
 
 export const AppSelect = ({
@@ -36,6 +38,7 @@ export const AppSelect = ({
   onValueChange,
   disabled,
   className,
+  ariaLabel,
 }: AppSelectProps) => {
   return (
     <Select
@@ -44,7 +47,7 @@ export const AppSelect = ({
       onValueChange={onValueChange}
       disabled={disabled}
     >
-      <SelectTrigger className={className}>
+      <SelectTrigger className={className} aria-label={ariaLabel}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
 

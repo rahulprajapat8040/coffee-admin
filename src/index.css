@@ -125,6 +125,25 @@
   }
 }
 
+.date-field {
+  color-scheme: light;
+  background-color: var(--color-card);
+  cursor: pointer;
+}
+
+.date-field::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.55;
+  padding: 0.35rem;
+  border-radius: 0.4rem;
+  transition: opacity 0.15s, background-color 0.15s;
+}
+
+.date-field::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  background-color: var(--color-cream);
+}
+
 @utility field {
   width: 100%;
   border-radius: 0.75rem;

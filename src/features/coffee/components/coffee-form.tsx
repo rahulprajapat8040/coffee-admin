@@ -74,7 +74,7 @@ export const CoffeeForm = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="max-h-[92vh] max-w-lg overflow-y-auto">
         <DialogHeader>{title}</DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div>
@@ -122,7 +122,12 @@ export const CoffeeForm = ({
           />
           <CoffeeVariant form={form} />
           <div className="flex items-center justify-end gap-5">
-            <Button disabled={addPending} type="reset" variant={"secondary"}>
+            <Button
+              disabled={addPending}
+              type="button"
+              variant={"secondary"}
+              onClick={() => onOpenChange(false)}
+            >
               Cancel
             </Button>
             <Button disabled={addPending}>Save</Button>

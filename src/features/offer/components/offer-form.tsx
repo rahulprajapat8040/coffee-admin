@@ -25,6 +25,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { AppSelect } from "@/components/ui/app-select";
+import { CalendarDays } from "lucide-react";
 
 const emptyValues = (): IOfferForm => ({
   title: "",
@@ -223,16 +225,17 @@ export const OfferForm = ({
             </div>
             <div className="space-y-2">
               <Label htmlFor="offer-target">Applies to</Label>
-              <select
-                id="offer-target"
+              <AppSelect
                 value={targetType}
-                onChange={(event) => changeTarget(event.target.value as OfferTargetType)}
-                className="h-10.5 w-full rounded border border-input bg-background px-3 text-sm"
-              >
-                <option value="ALL_PRODUCTS">All products</option>
-                <option value="SELECTED_COFFEES">Selected coffees</option>
-                <option value="SELECTED_CATEGORIES">Selected categories</option>
-              </select>
+                onValueChange={(value) => changeTarget(value as OfferTargetType)}
+                className="h-10.5 rounded-xl bg-card"
+                placeholder="Choose offer target"
+                options={[
+                  { label: "All products", value: "ALL_PRODUCTS" },
+                  { label: "Selected coffees", value: "SELECTED_COFFEES" },
+                  { label: "Selected categories", value: "SELECTED_CATEGORIES" },
+                ]}
+              />
             </div>
             {targetType !== "ALL_PRODUCTS" ? (
               <div className="space-y-2 sm:col-span-2">
@@ -281,24 +284,32 @@ export const OfferForm = ({
             ) : null}
             <div className="space-y-2">
               <Label htmlFor="offer-start-date">Starts at</Label>
-              <Input
-                id="offer-start-date"
-                type="datetime-local"
-                {...register("startDate", { required: "Choose a start date" })}
-              />
+              <div className="relative">
+                <CalendarDays className="pointer-events-none absolute left-3 top-3 size-4 text-primary" />
+                <Input
+                  id="offer-start-date"
+                  type="datetime-local"
+                  className="date-field pl-10"
+                  {...register("startDate", { required: "Choose a start date" })}
+                />
+              </div>
               {errors.startDate ? <p className="text-xs text-destructive">{errors.startDate.message}</p> : null}
             </div>
             <div className="space-y-2">
               <Label htmlFor="offer-end-date">Ends at (optional)</Label>
-              <Input
-                id="offer-end-date"
-                type="datetime-local"
-                {...register("endDate", {
-                  validate: (value) =>
-                    !value || !startDate || value > startDate ||
-                    "End date must be after the start date",
-                })}
-              />
+              <div className="relative">
+                <CalendarDays className="pointer-events-none absolute left-3 top-3 size-4 text-primary" />
+                <Input
+                  id="offer-end-date"
+                  type="datetime-local"
+                  className="date-field pl-10"
+                  {...register("endDate", {
+                    validate: (value) =>
+                      !value || !startDate || value > startDate ||
+                      "End date must be after the start date",
+                  })}
+                />
+              </div>
               {errors.endDate ? <p className="text-xs text-destructive">{errors.endDate.message}</p> : null}
             </div>
             <div className="sm:col-span-2">
