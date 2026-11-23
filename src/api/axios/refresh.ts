@@ -1,5 +1,7 @@
 import { axiosInstance } from "./axios";
-// import { logoutUser } from "../utils/logout";
+import type { IApiResponse } from "./base-res.interface";
+import type { IAuthResponse } from "@/features/auth/interfaces/auth-response.interface";
+import type { CustomAxiosRequestConfig } from "./types";
 
 let isRefreshing = false;
 
@@ -33,18 +35,35 @@ export async function refreshSession(): Promise<void> {
   }
 
   isRefreshing = true;
+  let refreshError: unknown;
 
   try {
-    await axiosInstance.post("/auth/refresh-token");
+    const refreshToken = sessionStorage.getItem("refreshToken");
+    if (!refreshToken) {
+      throw new Error("Refresh token is unavailable");
+    }
 
-    processQueue();
+    const response = await axiosInstance.post<IApiResponse<IAuthResponse>>(
+      "/auth/refresh-token",
+      undefined,
+      {
+        headers: { "X-Refresh-Token": refreshToken },
+        skipAuthRefresh: true,
+      } as CustomAxiosRequestConfig,
+    );
+
+    sessionStorage.setItem("accessToken", response.data.data.accessToken);
+    sessionStorage.setItem("refreshToken", response.data.data.refreshToken);
+
   } catch (error) {
-    processQueue(error);
+    refreshError = error;
 
-    // logoutUser();
+    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("refreshToken");
 
     throw error;
   } finally {
     isRefreshing = false;
+    processQueue(refreshError);
   }
 }

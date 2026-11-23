@@ -4,5 +4,8 @@ export const QUERY_KEY = {
   LIST: "list",
   DETAIL: "detail",
   COFFEE: "coffee",
+  ORDER: "order",
+  OFFER: "offer",
   SELECT: "select",
+  DASHBOARD: "dashboard",
 };

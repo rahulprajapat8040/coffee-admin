@@ -6,22 +6,26 @@ import { CategoryPage } from "./app/category/categories-page";
 import { AuthLayout } from "./features/auth/layout/auth-layout";
 import { LoginPage } from "./app/auth/login-page";
 import { CoffeesPage } from "./app/coffee/coffees-page";
+import { ProtectedRoute } from "./features/auth/layout/protected-route";
+import { OrdersPage } from "./app/order-page";
+import { OffersPage } from "./app/offer-page";
 
 function App() {
-
   return (
-    <>
-      <Routes>
-        <Route element={<AuthLayout />}>
-          <Route path={APP_ROUTES.LOGIN} element={<LoginPage />} />
-        </Route>
+    <Routes>
+      <Route element={<AuthLayout />}>
+        <Route path={APP_ROUTES.LOGIN} element={<LoginPage />} />
+      </Route>
+      <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
           <Route index element={<DashboardPage />} />
           <Route path={APP_ROUTES.CATEGORY} element={<CategoryPage />} />
           <Route path={APP_ROUTES.COFFEE} element={<CoffeesPage />} />
+          <Route path={APP_ROUTES.ORDERS} element={<OrdersPage />} />
+          <Route path={APP_ROUTES.OFFERS} element={<OffersPage />} />
         </Route>
-      </Routes>
-    </>
+      </Route>
+    </Routes>
   );
 }
 

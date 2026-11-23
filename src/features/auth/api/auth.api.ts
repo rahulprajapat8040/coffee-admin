@@ -7,6 +7,14 @@ import type { ILoginForm } from "../interfaces/login-form.interface";
 import { API_ENDPOINTS } from "@/lib/utils/constant/route-constant";
 
 export const authApi = {
+  sendOTP(email: string) {
+    return request<IApiResponse<string>>({
+      url: `${API_ENDPOINTS.AUTH}/send-otp`,
+      method: "POST",
+      data: { email },
+    });
+  },
+
   signup(data: ISignupForm) {
     return request<IApiResponse<IAuthResponse>>({
       url: "/auth/signup/email",

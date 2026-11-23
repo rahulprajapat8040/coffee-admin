@@ -1,7 +1,7 @@
 import { request } from "@/api/axios/request";
 import type { ICoffeeForm } from "../interface/coffee-form.interface";
 import { API_ENDPOINTS } from "@/lib/utils/constant/route-constant";
-import type { ICoffeeQuery, ISearchParam } from "@/lib/interface/query.interface";
+import type { ICoffeeQuery } from "@/lib/interface/query.interface";
 import { GetFilterUrl } from "@/lib/utils/helper/function.helper";
 import type { IApiResponse } from "@/api/axios/base-res.interface";
 import type { ICoffeeRes } from "../interface/coffee-res.interface";

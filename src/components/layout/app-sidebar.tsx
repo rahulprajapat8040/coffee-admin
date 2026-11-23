@@ -5,6 +5,7 @@ import {
   Tags,
   Package,
   Receipt,
+  Percent,
   X,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
@@ -14,7 +15,8 @@ const nav = [
   { to: "/", label: "Overview", icon: LayoutGrid },
   { to: APP_ROUTES.CATEGORY, label: "Categories", icon: Tags },
   { to: APP_ROUTES.COFFEE, label: "coffees", icon: Package },
-  { to: "/orders", label: "Orders", icon: Receipt },
+  { to: APP_ROUTES.ORDERS, label: "Orders", icon: Receipt },
+  { to: APP_ROUTES.OFFERS, label: "Offers", icon: Percent },
 ] as const;
 
 export function AppSidebar() {
